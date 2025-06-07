@@ -1,0 +1,36 @@
+```yaml
+agente_pesquisa:
+  description: >
+    Realizar a pesquisa de conteúdos relevantes na área de Python, identificando as tendências atuais, recursos e materiais didáticos disponíveis.
+  expected_output: >
+    Relatório com os principais tópicos e conteúdos relevantes.
+  agent: agente_pesquisa
+
+agente_levantamento_topicos:
+  description: >
+    Identificar e organizar os tópicos mais importantes a serem abordados no curso, com base na pesquisa realizada pelo Agente de Pesquisa.
+  expected_output: >
+    Lista de tópicos prioritários e possíveis subtemas validados.
+  agent: agente_levantamento_topicos
+
+agente_desenvolvimento_escopo:
+  description: >
+    Criar um escopo detalhado do curso, definindo objetivos de aprendizagem, estrutura de conteúdo e cronograma.
+  expected_output: >
+    Escopo do curso com tópicos, objetivos de aprendizagem e tempo estimado para cada módulo.
+  agent: agente_desenvolvimento_escopo
+
+agente_redator:
+  description: >
+    Redigir o conteúdo da apostila do curso, seguindo o escopo desenvolvido e integrando exemplos práticos.
+  expected_output: >
+    Material didático completo com textos, exercícios e exemplos práticos organizados.
+  agent: agente_redator
+
+agente_revisor:
+  description: >
+    Revisar o material escrito, garantindo clareza, precisão e correção ortográfica/gramatical.
+  expected_output: >
+    Feedback crítico com correções e sugestões para o Agente Redator.
+  agent: agente_revisor
+```

@@ -1,0 +1,34 @@
+pesquisa_conteudo:
+  description: >
+    O pesquisador de conteúdo utiliza a ferramenta SerperDevTool para buscar informações relevantes sobre o tópico {topico}. Ele deve identificar tendências, questões relacionadas e reunir materiais de referência que sirvam como base para o desenvolvimento do conteúdo. Lembrando que estamos no ano de 2025.
+  expected_output: >
+    Um relatório de pesquisa que contenha um resumo das informações coletadas, incluindo links para fontes relevantes, tópicos de interesse e dados importantes que apoiarão as próximas etapas de planejamento e criação de conteúdo.
+  agent: pesquisador_de_conteudo
+
+planejamento_conteudo:
+  description: >
+    O planejador de conteúdo organiza as informações do relatório do pesquisador e utiliza a ferramenta ScrapeWebsiteTool para fazer scraping dos sites, criando um briefing detalhado que define o conteúdo que será desenvolvido, incluindo formato e estrutura, gerando bons briefings para o tópico:  {topico}.
+  expected_output: >
+    Um briefing completo que delineia claramente a estrutura do conteúdo, os pontos principais a serem abordados, e uma lista de fontes ou materiais que serão utilizados no desenvolvimento do artigo.
+  agent: planejador_de_conteudo
+
+escrita_blog_post:
+  description: >
+    O escritor do blog utiliza o briefing desenvolvido pelo planejador de conteúdo para criar um artigo completo do topico de {topico}, garantindo que todas as informações sejam apresentadas de maneira coesa e que o texto atenda aos objetivos da equipe.
+  expected_output: >
+    O artigo de blog escrito, que deve ser envolvente, claro e informativo, abordando todos os pontos discutidos no briefing e pronto para a revisão final.
+  agent: escritor_do_blog
+
+revisao_conteudo:
+  description: >
+    O revisor do conteúdo revisa o artigo escrito para assegurar que não haja erros de gramática, ortografia ou clareza. Ele também adiciona informações relevantes que possam enriquecer o texto.
+  expected_output: >
+    Um documento revisado e polido, livre de erros, que inclui todas as melhorias feitas e que está formatado corretamente para publicação, pronto para ser disponibilizado ao público.
+  agent: revisor_do_conteudo
+
+salva_conteudo:
+  description: >
+    Salva o conteúdo utilizando a tool FileWriterTool, criando um nome de arquivo que faça sentido com relação ao conteúdo do texto.
+  expected_output: >
+    Arquivo salvo.
+  agent: revisor_do_conteudo

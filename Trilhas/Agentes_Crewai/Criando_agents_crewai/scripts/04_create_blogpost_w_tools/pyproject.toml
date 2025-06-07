@@ -1,0 +1,23 @@
+[project]
+name = "create_blogpost_w_tools"
+version = "0.1.0"
+description = "create_blogpost_w_tools using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.102.0,<1.0.0"
+]
+
+[project.scripts]
+create_blogpost_w_tools = "create_blogpost_w_tools.main:run"
+run_crew = "create_blogpost_w_tools.main:run"
+train = "create_blogpost_w_tools.main:train"
+replay = "create_blogpost_w_tools.main:replay"
+test = "create_blogpost_w_tools.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
