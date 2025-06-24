@@ -1,0 +1,105 @@
+planejar_arquitetura_do_sistema:
+  description: >
+    Definir a estrutura do sistema de agentes, listando os agentes necessários 
+    e as tarefas a serem executadas.
+    Sistema que deve ser criado é: {definicao_do_sistema}.
+  expected_output: >
+    Documento especificando os agentes e tarefas planejadas para o sistema de {definicao_do_sistema}.
+  agent: arquiteto_de_solucao
+
+criar_os_agentes:
+  description: >
+    Desenvolver o arquivo agents.yaml com a definição detalhada de cada agente, 
+    incluindo suas funções, objetivos e contexto, conforme definido anteriormente.
+  expected_output: >
+    Arquivo agents.yaml contendo a configuração dos agentes do sistema.
+    O arquivo deve ter a seguinte formatação:
+    ```yaml
+    nome_do_agente:
+      role: >
+        Role aqui
+      goal: >
+        Goal aqui
+      backstory: >
+        Backstory aqui
+    ```
+    Lembrando que os agentes devem ter um nome em snake case
+
+  agent: especialista_em_agentes
+
+definir_as_tarefas:
+  description: >
+    Criar o arquivo tasks.yaml especificando cada tarefa do sistema e seu 
+    respectivo agente executor.
+  expected_output: >
+    Arquivo tasks.yaml contendo todas as tarefas bem definidas.
+    O arquivo deve ter a seguinte formatação:
+    ```yaml
+    nome_da_task:
+      description: >
+        Descrição aqui
+      expected_output: >
+        Saída esperada aqui
+      agent: agente_aqui
+    ```
+    Lembrando que os agentes e tasks devem ter um nome em snake case
+  agent: gerente_de_fluxo_de_trabalho
+
+desenvolver_o_arquivo_de_orquestracao:
+  description: >
+    Criar o arquivo crew.py, carregando os agentes e tarefas definidos e garantindo 
+    que o sistema funcione corretamente.
+  expected_output: >
+    Arquivo crew.py implementado e pronto para ser executado.
+    O arquivo deve seguir a seguinte formatação:
+    ```python
+    from crewai import Agent, Crew, Process, Task
+    from crewai.project import CrewBase, agent, crew, task
+
+    @CrewBase
+    class CreateCrewProject():
+      """CreateCrewProject crew"""
+
+
+      agents_config = 'config/agents.yaml'
+      tasks_config = 'config/tasks.yaml'
+
+      @agent
+      def arquiteto_de_solucao(self) -> Agent:
+        return Agent(
+          config=self.agents_config['arquiteto_de_solucao'],
+          verbose=True,
+        )
+
+      @agent
+      def especialista_em_agentes(self) -> Agent:
+        return Agent(
+          config=self.agents_config['especialista_em_agentes'],
+          verbose=True
+        )
+
+      @task
+      def planejar_arquitetura_do_sistema(self) -> Task:
+        return Task(
+          config=self.tasks_config['planejar_arquitetura_do_sistema'],
+        )
+
+      @task
+      def criar_os_agentes(self) -> Task:
+        return Task(
+          config=self.tasks_config['criar_os_agentes'],
+        )
+
+      @crew
+      def crew(self) -> Crew:
+        """Creates the CreateCrewProject crew"""
+
+        return Crew(
+          agents=self.agents, # Automatically created by the @agent decorator
+          tasks=self.tasks, # Automatically created by the @task decorator
+          process=Process.sequential,
+          verbose=True,
+        )
+
+    ```
+  agent: engenheiro_de_orquestracao

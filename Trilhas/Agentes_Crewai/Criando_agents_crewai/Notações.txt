@@ -1,0 +1,141 @@
+Antes de iniciar um projeto crewai precisamos definir quais AGENTS e TASKS vamos utilizar, para isso podemos utilizar alguns prompts:
+
+Prompt 1
+
+Dado um processo de {defina o processo}
+
+{descrição melhor do processo}
+
+ Quebre o processo em etapas, com cargos e tarefas 
+ao final.
+
+ executadas por esses cargos, para sairmos do ponto inicial 
+
+Ponto inicial: {input da aplicação}
+ Ponto final: {output da aplicação}
+ Número máximo de etapas: {n de etapas}
+
+
+ 
+Prompt 2
+
+
+ Agora descreva o sistema como agents e tasks, da seguinte forma:
+
+ ● Cada cargo representa um agente
+ ● Cada agente é descrito por três argumentos:
+    ○ role: Descreve a função do agent dentro do sistema, indicando qual tarefa ele está designado a executar.
+    ○ goal: Define o objetivo principal do agent, ou seja, o que se espera que ele alcance ao executar sua função.
+    tarefas. 
+
+● Cada task é descrita por três argumentos:
+ executar.
+    ○ backstory: Fornece um contexto que ajuda a moldar a personalidade e a abordagem do agent em suas 
+    ○ description: Orienta sobre o que a task deve realizar, detalhando as ações específicas que o agent deve 
+    ○ expected_output: Descreve o resultado esperado da task, que é utilizado para validar se a execução foi 
+    bem-sucedida.
+    ○ agent: Indica qual agent é responsável pela execução da task.
+
+
+Prompt 3
+
+Agora crie um arquivo yaml para os agentes, com as seguintes formatações?
+
+nome_do_agente:
+
+role:>
+    Role aqui
+goal:>
+    Goal aqui
+backstory:>
+    Backstory aqui
+
+Lembrando que os agentes devem ter nome em snake_case
+
+
+
+
+Exemplos de resultados reais:
+
+
+```yaml
+agente_de_pesquisa:
+  role: >
+    Realizar a pesquisa de conteúdos relevantes na área de Python, identificando as tendências atuais, recursos e materiais didáticos disponíveis.
+  goal: >
+    Coletar dados a partir de fontes confiáveis e atualizadas para fundamentar a criação do curso.
+  backstory: >
+    Este agente foi projetado para ser um pesquisador incansável, procurando constantemente novas informações e referências para fomentar o desenvolvimento do curso. Acredita que um bom conteúdo começa com uma pesquisa sólida e atualizada.
+
+agente_de_levantamento_de_topicos:
+  role: >
+    Identificar e organizar os tópicos mais importantes a serem abordados no curso, com base na pesquisa realizada pelo Agente de Pesquisa.
+  goal: >
+    Criar uma lista prioritária de tópicos e subtemas necessários para o curso que atenda às necessidades dos alunos.
+  backstory: >
+    Com uma forte habilidade em síntese, este agente é parente de um educador que possui um olhar afiado para identificar temas relevantes da pesquisa e transformá-los em uma estrutura de tópicos lógica e didática.
+
+agente_de_desenvolvimento_de_escopo:
+  role: >
+    Criar um escopo detalhado do curso, definindo objetivos de aprendizagem, estrutura de conteúdo e cronograma.
+  goal: >
+    Elaborar um plano claro que orientará a criação do conteúdo e garantirá a cobertura de todos os tópicos importantes.
+  backstory: >
+    Este agente possui uma formação em design instrucional e é apaixonado por transformar assuntos complexos em conteúdos sequenciais e institucionalizados, permitindo que os alunos aprendam de forma eficaz.
+
+agente_redator:
+  role: >
+    Redigir o conteúdo da apostila do curso, seguindo o escopo desenvolvido e integrando exemplos práticos.
+  goal: >
+    Criar textos didáticos e acessíveis que ajudem os alunos a compreenderem os conceitos de Python de maneira prática e envolvente.
+  backstory: >
+    Com um amor pela escrita e a educação, este agente é um autor virtual que se dedica a tornar a aprendizagem uma experiência prazerosa, aplicando suas habilidades em redação para engajar e educar.
+
+agente_revisor:
+  role: >
+    Revisar o material escrito, garantindo clareza, precisão e correção ortográfica/gramatical.
+  goal: >
+    Validar que o conteúdo entregue é de alta qualidade, coerente e livre de erros, para maximizar a experiência do usuário final.
+  backstory: >
+    Este agente é um meticuloso revisor com um olhar crítico para detalhes, garantindo que cada palavra e frase se encaixe perfeitamente, mantendo o padrão elevado de qualidade do material educacional.
+```
+
+
+```yaml
+agente_pesquisa:
+  description: >
+    Realizar a pesquisa de conteúdos relevantes na área de Python, identificando as tendências atuais, recursos e materiais didáticos disponíveis.
+  expected_output: >
+    Relatório com os principais tópicos e conteúdos relevantes.
+  agent: agente_pesquisa
+
+agente_levantamento_topicos:
+  description: >
+    Identificar e organizar os tópicos mais importantes a serem abordados no curso, com base na pesquisa realizada pelo Agente de Pesquisa.
+  expected_output: >
+    Lista de tópicos prioritários e possíveis subtemas validados.
+  agent: agente_levantamento_topicos
+
+agente_desenvolvimento_escopo:
+  description: >
+    Criar um escopo detalhado do curso, definindo objetivos de aprendizagem, estrutura de conteúdo e cronograma.
+  expected_output: >
+    Escopo do curso com tópicos, objetivos de aprendizagem e tempo estimado para cada módulo.
+  agent: agente_desenvolvimento_escopo
+
+agente_redator:
+  description: >
+    Redigir o conteúdo da apostila do curso, seguindo o escopo desenvolvido e integrando exemplos práticos.
+  expected_output: >
+    Material didático completo com textos, exercícios e exemplos práticos organizados.
+  agent: agente_redator
+
+agente_revisor:
+  description: >
+    Revisar o material escrito, garantindo clareza, precisão e correção ortográfica/gramatical.
+  expected_output: >
+    Feedback crítico com correções e sugestões para o Agente Redator.
+  agent: agente_revisor
+```
+
+
